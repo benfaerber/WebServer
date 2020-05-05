@@ -13,11 +13,6 @@ public class Settings
 	
 	public Settings()
 	{
-		load();
-	}
-	
-	public void load()
-	{
 		map = new HashMap<String, String>();
 		Path path = Paths.get(System.getProperty("user.dir"), "settings", "settings.txt");
 		File file = new File(path.toString());

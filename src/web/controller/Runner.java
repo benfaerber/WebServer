@@ -8,8 +8,9 @@ public class Runner
 	{
 		Settings settings = new Settings();
 		int port = settings.getInt("port");
+		boolean isDebug = settings.is("debug");
 
-		Server server = new Server();
+		Server server = new Server(isDebug);
 		server.run(port);
 	}
 }
