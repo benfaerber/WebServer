@@ -17,6 +17,7 @@ public class Server
 	public boolean isDebug = true;
 	private Controller controller;
 	private Routes routes;
+	private Templater templater;
 	private HashMap<String, String> globalData;
 	private int requestsServed = 0;
 	
@@ -29,6 +30,7 @@ public class Server
 		this.isDebug = isDebug;
 		this.routes = new Routes();
 		this.controller = new Controller();
+		this.templater = new Templater();
 	}
 	
     public void run(int port) throws IOException
@@ -41,24 +43,37 @@ public class Server
         {
             try (Socket socket = server.accept())
             {
+            	// Analytics
             	requestsServed++;
-
+            	currentTime = Instant.now().getEpochSecond();
+            	runTime = currentTime - startTime;
+            	
+            	// Global Data
+            
             	globalData = new HashMap<String, String>();
             	globalData.put("requestsServed", Integer.toString(requestsServed));
+            	globalData.put("startTime", Long.toString(startTime));
+            	globalData.put("currentTime", Long.toString(currentTime));
+            	globalData.put("runTime", Long.toString(runTime));
             	
-            	
-            	
+            	// See which route is requested
             	String requestedRoute = getRoute(socket);
             	
             	if (this.isDebug)
             		System.out.println("A request was made for " + requestedRoute + "...");
             	
+            	// Find the choosen route or 404
             	requestedRoute = requestedRoute.replace("/", "");
             	Route serveRoute = routes.get(requestedRoute);
             	
+            	// Grab the route specific data from the controller
             	HashMap<String, String> grabbedData = controller.request(serveRoute.title);
             	
-            	serve(socket, serveRoute.getContent(grabbedData, globalData), serveRoute.getType());
+            	String template = serveRoute.getContent();
+            	String renderedContent = templater.render(template, grabbedData, globalData);
+            	
+            	// Serve the file
+            	serve(socket, renderedContent, serveRoute.getType());
             	
             	if (this.isDebug)
             	{

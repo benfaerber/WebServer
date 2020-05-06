@@ -12,14 +12,14 @@ public class Route
 	public String title;
 	public String file;
 	private String ext;
-	
+		
 	public Route(String title, String file)
 	{
 		this.title = title;
 		this.file = file;
 		
 		String[] parts = file.split("\\.");
-		this.ext = parts[parts.length-1];
+		this.ext = parts[parts.length-1];		
 	}
 	
 	public String getType()
@@ -48,7 +48,7 @@ public class Route
 		return value;
 	}
 	
-	public String getContent(HashMap<String, String> data, HashMap<String, String> globalData)
+	public String getContent()
 	{
 		try {
 			Path path = Paths.get(System.getProperty("user.dir"), "view", file);

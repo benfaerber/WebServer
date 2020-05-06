@@ -15,6 +15,7 @@ public class Routes
 		// Define your routes here:
 		routes.add(new Route("home", "index.html"));
 		routes.add(new Route("about", "about.html"));
+		routes.add(new Route("css", "css/style.css"));
 		routes.add(new Route("data", "data/data.json"));
 	}
 	
