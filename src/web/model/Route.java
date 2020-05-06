@@ -48,7 +48,7 @@ public class Route
 		return value;
 	}
 	
-	public String getContent(HashMap<String, String> data)
+	public String getContent(HashMap<String, String> data, HashMap<String, String> globalData)
 	{
 		try {
 			Path path = Paths.get(System.getProperty("user.dir"), "view", file);

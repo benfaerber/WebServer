@@ -9,16 +9,26 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.HashMap;
+import java.time.Instant;
 
 public class Server
 {
 	public boolean isDebug = true;
+	private Controller controller;
 	private Routes routes;
+	private HashMap<String, String> globalData;
+	private int requestsServed = 0;
+	
+	private long startTime = 0;
+	private long currentTime = 0;
+	private long runTime = 0;
 	
 	public Server(boolean isDebug)
 	{
 		this.isDebug = isDebug;
-		routes = new Routes();
+		this.routes = new Routes();
+		this.controller = new Controller();
 	}
 	
     public void run(int port) throws IOException
@@ -26,10 +36,18 @@ public class Server
     	boolean running = true;
         ServerSocket server = new ServerSocket(port);
         System.out.println("Server is running on localhost:" + port + "...");
+        startTime = Instant.now().getEpochSecond();
         while (running)
         {
             try (Socket socket = server.accept())
             {
+            	requestsServed++;
+
+            	globalData = new HashMap<String, String>();
+            	globalData.put("requestsServed", Integer.toString(requestsServed));
+            	
+            	
+            	
             	String requestedRoute = getRoute(socket);
             	
             	if (this.isDebug)
@@ -38,7 +56,9 @@ public class Server
             	requestedRoute = requestedRoute.replace("/", "");
             	Route serveRoute = routes.get(requestedRoute);
             	
-            	serve(socket, serveRoute.getContent(null), serveRoute.getType());
+            	HashMap<String, String> grabbedData = controller.request(serveRoute.title);
+            	
+            	serve(socket, serveRoute.getContent(grabbedData, globalData), serveRoute.getType());
             	
             	if (this.isDebug)
             	{

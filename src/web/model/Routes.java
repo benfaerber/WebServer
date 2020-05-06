@@ -15,8 +15,7 @@ public class Routes
 		// Define your routes here:
 		routes.add(new Route("home", "index.html"));
 		routes.add(new Route("about", "about.html"));
-		routes.add(new Route("berlin", "img/berlin.png"));
-		routes.add(new Route("berlinData", "data/berlinData.json"));
+		routes.add(new Route("data", "data/data.json"));
 	}
 	
 	public Route get(String routeName)
