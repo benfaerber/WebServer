@@ -22,9 +22,12 @@ public class Controller
 				return null;
 			}
 		}
-		else if (routeName.equals("about"))
+		else if (routeName.equals("documentation"))
 		{
-			
+			double ranNum = Math.random()*100;
+			String ranString = Double.toString(ranNum);
+			data.put("randomNumber", ranString);
+			return data;
 		}
 		
 		return null;

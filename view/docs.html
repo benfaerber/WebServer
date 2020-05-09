@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Java Web Server - Documentation</title>
+</head>
+include(style.html)
+<body>
+  include(header.html)
+  <h2>Documentation</h2>
+
+  <h3>Routing</h3>
+  <p>
+    Routes are added to the Routes.java file found in the model. In the routes contstructor add a new route using:
+  </p>
+  <p class="code">
+    routes.add(new Route(routeName, filepath));<br>
+    //Example<br>
+    routes.add(new Route("home", "index.html"));
+  </p>
+  <p>
+    The router assumes that your html files are placed in the "view" folder. For example "index.html" is read as "WebServer/view/index.html"
+  </p>
+
+  <h3>Sending Data to Routes</h3>
+  <p>Everytime a page is requested the function "request" is called in the file Controller.java. This function is given the route title as a parmeter.
+    If your route needs data from somewhere in your Java app, you need to pack this data into the data hashmap. You can then use the templating engine to display this data.</p>
+  <p>The following code was added to the request function and is used to display a random number on this page:</p>
+  <p class="code">
+    if (routeName.equals("documentation"))<br>
+		{<br>
+      &nbsp;&nbsp;double ranNum = Math.random()*100;<br>
+			&nbsp;&nbsp;String ranString = Double.toString(ranNum);<br>
+			&nbsp;&nbsp;data.put("randomNumber", ranString);<br>
+			&nbsp;&nbsp;return data;<br>
+		}
+  </p>
+  <p>Output: [[ randomNumber ]]</p>
+  <p>The hashmap only accepts Strings, so convert your values to Strings before adding thgem to the data hashmap.</p>
+
+  <h3>Displaying Data</h3>
+  <p>Data is grabbed using the key you assigned it. In our example our random number has been given the key "randomNumber". This is what we use to look up the value.
+    In this html file (docs.html) we add the following:</p>
+  <p class="code">
+    &lt;p&gt;
+    Output: [*[ randomNumber ]*]
+    &lt;/p&gt;
+  </p>
+
+  <h3>Including Subfiles</h3>
+  <p>Included files are grabbed from the "view" folder, just like route files. You can include a subfile in a route file using the following syntax:</p>
+  <p class="code">
+    &lt;p&gt;
+    include*(fileToInclude.html)
+    &lt;/p&gt;
+  </p>
+  <p>This page includes 3 subfiles:</p>
+  <ul>
+    <li>header.html</li>
+    <li>footer.html</li>
+    <li>style.html</li>
+  </ul>
+
+  <h3>That's it!</h3>
+
+  include(footer.html)
+</body>
+</html>

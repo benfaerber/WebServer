@@ -62,7 +62,7 @@ public class Server
             	if (this.isDebug)
             		System.out.println("A request was made for " + requestedRoute + "...");
             	
-            	// Find the choosen route or 404
+            	// Find the chosen route or 404
             	requestedRoute = requestedRoute.replace("/", "");
             	Route serveRoute = routes.get(requestedRoute);
             	
@@ -103,7 +103,7 @@ public class Server
     public void serve(Socket socket, String content, String type)
     {
         String response = "HTTP/1.1 200 OK\r\n";
-        response += "Content-Type: text/html; charset=utf-8\r\n";
+        response += "Content-Type: " + type + "; charset=utf-8\r\n";
         response += "\r\n";
         // Start Response Body
         response += content;

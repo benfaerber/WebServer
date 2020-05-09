@@ -5,30 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Java Web Server</title>
 </head>
-<style>
-
-body {
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-</style>
+include(style.html)
 <body>
-  include(header)
+  include(header.html)
 
   <h2>Welcome to the Java Web Server</h2>
-  <h3>By Ben Faerber</h3>
   <h3>Features</h3>
   <ul>
-    <li>You can serve files over the internet and host a dynamic website</li>
-    <li>Include data from your java app into your website using the templating engine</li>
-    <li>Reuse webcompents by loading sub files inside of webpages</li>
-  </ul>
-
-  <h3>Pages</h3>
-  <ul>
-    <li><a href="home">Home</a></li>
-    <li><a href="about">About</a></li>
-    <li><a href="documentation">Documentation</a></li>
+    <li>Serve files over the internet</li>
+    <li>Generate dynamic files with data from your Java app</li>
+    <li>Reuse code by including subfiles into your served files</li>
+    <li>Create customized URLs using the routing system</li>
   </ul>
   
   <h3>Server Data</h3>
@@ -39,6 +26,14 @@ body {
     <li>Current Time: [[ currentTime ]]</li>
     <li>Total Runtime: [[ runTime ]]</li>
   </ul>
+
+  <h3>Displaying Server Commands</h3>
+  <ul>
+    <li>include*(file.html)</li>
+    <li>[*[ variable ]*]</li>
+  </ul>
+
+  include(footer.html)
 
 </body>
 </html>

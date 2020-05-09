@@ -12,7 +12,7 @@ public class Route
 	public String title;
 	public String file;
 	private String ext;
-		
+	
 	public Route(String title, String file)
 	{
 		this.title = title;
