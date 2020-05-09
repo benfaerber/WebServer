@@ -13,6 +13,8 @@ body {
 
 </style>
 <body>
+  include(header)
+
   <h2>Welcome to the Java Web Server</h2>
   <h3>By Ben Faerber</h3>
   <h3>Features</h3>
@@ -21,12 +23,19 @@ body {
     <li>Include data from your java app into your website using the templating engine</li>
     <li>Reuse webcompents by loading sub files inside of webpages</li>
   </ul>
-  
-  <h3>Global Server Data</h3>
+
+  <h3>Pages</h3>
   <ul>
+    <li><a href="home">Home</a></li>
+    <li><a href="about">About</a></li>
+    <li><a href="documentation">Documentation</a></li>
+  </ul>
+  
+  <h3>Server Data</h3>
+  <ul>
+    <li>Start Time: [[ startTime ]]</li>
     <li>Computer Username: [[ username ]]</li>
     <li>Requests Served: [[ requestsServed ]]</li>
-    <li>Start Time: [[ startTime ]]</li>
     <li>Current Time: [[ currentTime ]]</li>
     <li>Total Runtime: [[ runTime ]]</li>
   </ul>

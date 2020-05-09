@@ -23,7 +23,7 @@ public class Routes
 	{
 		for (Route route : routes)
 		{
-			if (routeName.length() == 0 && route.file.equals("index.html"))
+			if ((routeName.length() == 0 && route.file.equals("index.html")) || routeName.equals("favicon.ico"))
 				return route;
 			
 			if (route.title.equals(routeName))

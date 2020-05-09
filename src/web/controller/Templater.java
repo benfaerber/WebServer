@@ -1,37 +1,33 @@
 package web.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Templater
 {	
 	public String render(String content, HashMap<String, String> data, HashMap<String, String> globalData)
 	{
-		String beginDelimiter = "[[";
-		String endDelimiter = "]]";
-		
-		HashMap<String, String> replace = new HashMap<String, String>();
-		int currentIndex = 0;
-		while (currentIndex < content.length())
-		{
-			int begIndex = content.indexOf(beginDelimiter, currentIndex);
-			int endIndex = content.indexOf(endDelimiter, begIndex);
-			String key = content.substring(begIndex + beginDelimiter.length(), endIndex);
-			String assembled = beginDelimiter + key + endDelimiter;
-			key = key.trim();
-			
-			// Route specific values are looked for first
-			String value = "undefined";
-			if (data.get(key) != null)
-				value = data.get(key);
-			else if (globalData.get(key) != null)
-				value = globalData.get(key);
-			
-			replace.put(assembled, value);
-			currentIndex += endIndex;
-		}
-		
-		
-		
+		// Get matches
+		String patt = "\\[\\[( )?([a-zA-Z])+( )?\\]\\]";
+		ArrayList<String> matches = new ArrayList<String>();
+		Matcher m = Pattern.compile(patt).matcher(content);
+		while (m.find())
+			matches.add(m.group());
+	 
+		 for (String match : matches)
+		 {
+			 String key = match.replace("[[", "").replace("]]", "").trim();
+			 String val = "undefined";
+			 if (data.get(key) != null)
+				 val = data.get(key);
+			 else if (globalData.get(key) != null)
+				 val = globalData.get(key);
+			 
+			 content = content.replace(match, val);
+		 }
+		 		
 		return content;
 	}
 }
