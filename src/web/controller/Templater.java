@@ -53,6 +53,7 @@ public class Templater
 					String line = sc.nextLine();
 					readContent += line;
 				}
+				sc.close();
 				
 				content = content.replace(match, readContent);
 			} catch (FileNotFoundException e) {
