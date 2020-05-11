@@ -9,3 +9,4 @@ Host a website and include data from your Java App!
 4. Read the docs and get started!
 
 ![Docs](https://raw.githubusercontent.com/benfaerber/WebServer/master/docs.png)
+(Click to expand)
