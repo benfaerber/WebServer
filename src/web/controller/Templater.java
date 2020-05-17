@@ -15,7 +15,7 @@ public class Templater
 	public String render(String content, HashMap<String, String> data, HashMap<String, String> globalData)
 	{
 		content = includeFiles(content);
-		String patt = "\\[\\[( )?([a-zA-Z])+( )?\\]\\]";
+		String patt = "\\[\\[( )?([a-zA-Z0-9])+( )?\\]\\]";
 		ArrayList<String> matches = getMatches(patt, content);
 	 
 		 for (String match : matches)
