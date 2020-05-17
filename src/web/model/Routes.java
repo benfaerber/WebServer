@@ -7,6 +7,10 @@ public class Routes
 	private ArrayList<Route> routes;
 	private Route error404;
 	
+	/*
+	constructor
+	Adds all the routes for the app
+	*/
 	public Routes()
 	{
 		routes = new ArrayList<Route>();
@@ -18,7 +22,12 @@ public class Routes
 		routes.add(new Route("css", "css/style.css"));
 		routes.add(new Route("data", "data/data.json"));
 	}
-	
+
+	/*
+	loads a route based on the routeName or 404s if the route is not found
+	@param routeName - the user requested route
+	@returns the requested route or the 404 route if not found
+	*/	
 	public Route get(String routeName)
 	{
 		for (Route route : routes)

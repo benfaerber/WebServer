@@ -13,6 +13,11 @@ public class Route
 	public String file;
 	private String ext;
 	
+	/*
+	constructor
+	@param title - the route title
+	@param file - a filepath to the template file
+	*/
 	public Route(String title, String file)
 	{
 		this.title = title;
@@ -21,7 +26,11 @@ public class Route
 		String[] parts = file.split("\\.");
 		this.ext = parts[parts.length-1];		
 	}
-	
+
+	/*
+	Matches the file extenstion to an http file type
+	@returns the http file type as a string
+	*/
 	public String getType()
 	{
 		HashMap<String, String> types = new HashMap<String, String>();
@@ -48,6 +57,10 @@ public class Route
 		return value;
 	}
 	
+	/*
+	Reads the route template file and returns it
+	@returns the route template file as a string
+	*/
 	public String getContent()
 	{
 		try {
@@ -61,6 +74,7 @@ public class Route
 				String line = sc.nextLine();
 				content += line;
 			}
+			sc.close();
 			
 			return content;
 		} catch (FileNotFoundException e) {

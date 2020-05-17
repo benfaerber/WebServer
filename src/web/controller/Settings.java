@@ -11,6 +11,10 @@ public class Settings
 {
 	private HashMap<String, String> map;
 	
+	/*
+	constructor
+	Reads the settings file and puts it into the "map" hashmap
+	*/
 	public Settings()
 	{
 		map = new HashMap<String, String>();
@@ -30,22 +34,38 @@ public class Settings
 		}
 	}
 	
+	/*
+	Returns a string from the settings map
+	@param key - the key from the settings key value pair text file
+	*/
 	public String get(String key)
 	{
 		key = key.toUpperCase();
 		return map.get(key);
 	}
 	
+	/*
+	Returns a boolean from the settings map
+	@param key - the key from the settings key value pair text file
+	*/
 	public boolean is(String key)
 	{
 		return !get(key).equals("false");
 	}
 	
+	/*
+	Returns an int from the settings map
+	@param key - the key from the settings key value pair text file
+	*/
 	public int getInt(String key)
 	{
 		return Integer.parseInt(get(key));
 	}
 	
+	/*
+	Returns a float from the settings map
+	@param key - the key from the settings key value pair text file
+	*/
 	public float getFloat(String key)
 	{
 		return Float.parseFloat(get(key));

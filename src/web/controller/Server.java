@@ -25,6 +25,10 @@ public class Server
 	private long currentTime = 0;
 	private long runTime = 0;
 	
+	/*
+	Constructor
+	@param isDebug - isDebug is read from the settings file and sent here (controls whether verbose logging should be done)
+	*/
 	public Server(boolean isDebug)
 	{
 		this.isDebug = isDebug;
@@ -33,6 +37,10 @@ public class Server
 		this.templater = new Templater();
 	}
 	
+	/*
+	The main program loop, calls the controller to crunch route data, calculates global data, serves requests
+	@param port - the port the server should run on (4-5 digit number)
+	*/
     public void run(int port) throws IOException
     {
     	boolean running = true;
@@ -87,6 +95,10 @@ public class Server
         server.close();
     }
     
+    /*
+	Returns what route should be redered based on the HTTP requests sent by the client
+	@param socket - the socket used to host the server
+	*/
     public String getRoute(Socket socket)
     {
 		try {
@@ -100,6 +112,12 @@ public class Server
 		}
     }
     
+    /*
+	Run whenever a user requests a route
+	@param socket - the socket hosting the server
+	@param content - the rendered text content for the page
+	@param type - the http file type (ie text/html, text/json)
+	*/
     public void serve(Socket socket, String content, String type)
     {
         String response = "HTTP/1.1 200 OK\r\n";

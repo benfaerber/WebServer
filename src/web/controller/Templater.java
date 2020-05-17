@@ -12,6 +12,13 @@ import java.util.regex.Pattern;
 
 public class Templater
 {	
+	/*
+	Uses a template, route specific data, and globalData to create a rendered file
+	@param content - the template loaded as a string
+	@param data - the route specific data hashmap
+	@param globalData - global data provided by the server
+	@returns rendered content
+	*/
 	public String render(String content, HashMap<String, String> data, HashMap<String, String> globalData)
 	{
 		content = includeFiles(content);
@@ -34,6 +41,11 @@ public class Templater
 		return content;
 	}
 	
+	/*
+	Finds all the include commands, loads the requested files, and creates a file with subfiles loaded
+	@param content - the loaded template string
+	@returns a string with all subfiles included
+	*/
 	private String includeFiles(String content)
 	{
 		String patt = "include\\(.*?\\)";
@@ -64,6 +76,12 @@ public class Templater
 		return content;
 	}
 	
+	/*
+	Changes escaped commands into regular looking commands.
+	Used for rendering documentation without actually excecuting them as commands
+	@param content - the rendered content with all commands already executed
+	@returns a string with escaped commands as regular looking commands
+	*/
 	private String displayCommands(String content)
 	{
 		content = content.replace("include*(", "include(");
@@ -71,6 +89,11 @@ public class Templater
 		return content;
 	}
 	
+	/*
+	Uses a regular expression to find a list of matches
+	@param pattern - a regular expression as a string
+	@param content - string to match the regular expression against
+	*/
 	private ArrayList<String> getMatches(String pattern, String content)
 	{
 		ArrayList<String> matches = new ArrayList<String>();

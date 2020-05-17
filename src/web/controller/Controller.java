@@ -6,6 +6,11 @@ import java.util.HashMap;
 
 public class Controller
 {
+	/*
+	Returns a hashmap containing route specific data.
+	@param routeName - the route name the user requested
+	@returns hashmap of data for each route. You can exclude other files to crunch data for complex routes
+	*/
 	public HashMap<String, String> request(String routeName)
 	{
 		HashMap<String, String> data = new HashMap<String, String>();
